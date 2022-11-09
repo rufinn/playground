@@ -1,0 +1,26 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run ./src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rufinn/playground.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rufinn/playground/issues"
+  },
+  "homepage": "https://github.com/rufinn/playground#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "vitest": "^0.25.1"
+  },
+  "dependencies": {
+    "typescript": "^4.8.4"
+  }
+}
