@@ -1,4 +1,10 @@
-
+/**
+ * 
+ * Merge Sort - Divide and Conquere
+ * 1. Divide data into smaller chunks.
+ * 2. When data cannot be divided anymore, sort and merge.
+ * 3. Restart step 1 until nothing to be merged.
+ */
 const mergeSort = (nums: number[]): number[] => {
     /**
      * Divide and conquere until there is nothing to divide.
@@ -63,7 +69,6 @@ const merge = (leftArray: number[], rightArray: number[]): number[] => {
                 right++;
             }
         }
-
 
         return [...result, ...leftArray.slice(left), ...rightArray.slice(right)];
     */
