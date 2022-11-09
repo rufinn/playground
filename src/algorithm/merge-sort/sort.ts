@@ -33,9 +33,9 @@ const merge = (leftArray: number[], rightArray: number[]): number[] => {
      */
     while (leftArray.length && rightArray.length) {
         if(leftArray[0] < rightArray[0]) {
-            result.push(leftArray.shift());
+            result.push(leftArray.shift()!);
         } else {
-            result.push(rightArray.shift());
+            result.push(rightArray.shift()!);
         }
     }
 
@@ -46,6 +46,27 @@ const merge = (leftArray: number[], rightArray: number[]): number[] => {
      * Order does not matter because either one is empty.
      */
     return [...result, ...leftArray, ...rightArray];
+
+    /**
+     * Alternative Solution - Not corrupt the array.
+     * Downside - expensive in cloning arrays.
+     *
+     *
+        let left = 0;
+        let right = 0;
+        while(left < leftArray.length && right < rightArray.length) {
+            if (leftArray[left] < rightArray[right]) {
+                result.push(leftArray[left]);
+                left++;
+            } else {
+                result.push(rightArray[right]);
+                right++;
+            }
+        }
+
+
+        return [...result, ...leftArray.slice(left), ...rightArray.slice(right)];
+    */
 };
 
 export const sort = (nums: number[]): number[] => {
