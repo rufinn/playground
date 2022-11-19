@@ -1,4 +1,3 @@
-import { expect, it } from 'vitest';
 import { sort } from './sort';
 
 const TEST_DATA: number[] = [
