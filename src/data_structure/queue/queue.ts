@@ -14,7 +14,7 @@ class Queue {
     }
 
     remove() {
-        this.values.shift();
+        return this.values.shift();
     }
 }
 
