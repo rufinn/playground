@@ -14,7 +14,7 @@
     }
 
     remove() {
-        this.values.pop();
+        return this.values.pop();
     }
 }
 
