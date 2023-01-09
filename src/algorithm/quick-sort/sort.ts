@@ -83,6 +83,7 @@ const partition = (nums: number[], startIndex: number, endIndex: number) => {
         /**
          * At this point,
          * right-number =< pivot =< left-number
+         * leftIndex <= rightIndex i.e. greater number at the left and smaller number at the right
          * Move the numbers i.e. they are in the correct order.
          * Move the indices for next check.
          */

@@ -1,0 +1,122 @@
+/**
+ * Image Synchronisation
+ *
+ * An autonomous car records images on its left and right camera as two ordered
+ * lists of (timestamp: int, image: str) pairs. These two lists must be
+ * combined in order to create a dataset for training a machine learning model.
+ *
+ * Write an efficient algorithm that takes in two lists of (timestamp, image)
+ * pairs and returns a single ordered list of
+ * (timestamp, left image, right image) tuples, suitable for training.
+ *
+ * Example 0:
+ *
+ * A => [(1, "A1"), (2, "A2"), (3, "A3")] [[1, "A1"], ...]
+ * B => [(1, "B1"), (2, "B2"), (3, "B3")]
+ * Result => [(1, "A1", "B1"), (2, "A2", "B2"), (3, "A3", "B3")]
+ *
+ * Example 1:
+ *
+ * A => [(1, "A1"), (2, "A2"), (3, "A3"), (4, "A4"), (7, "A7")]
+ * B => [(1, "B1"), (3, "B3"), (4, "B4"), (5, "B5"), (7, "B7")]
+ * Result => [
+ *   (1, "A1", "B1"), [1, "Ai", "B1"]
+ *   (2, "A2", null),
+ *   (3, "A3", "B3"),
+ *   (4, "A4", "B4"),
+ *   (5, null, "B5"),
+ *   (7, "A7", "B7")
+ * ]
+ */
+
+
+/**
+ * Modify the function to accept a tolerance parameter (time delta), so that
+ * timestamps can be matched even if they are not an exact match
+ *
+ * Example 2:
+ *
+ * A => [(1.4, "A1"), (2.3, "A2"), (3.2, "A3"), (4.1, "A4")]
+ * B => [(0.2, "B1"), (1.3, "B1"), (2.3, "B2"), (3.39, "B3"), (4.5, "B4")]
+ * d => 0.2
+ * Result => [
+ *   (1.4, "A1", "B1"),
+ *   (1.3, null, "B1"),
+ *   (2.3, "A2", "B2"),
+ *   (3.2, "A3", "B3"),
+ *   (4.1, "A4", null),
+ *   (4.5, null, "B4"),
+ * ]
+ */
+
+const pointerB = 0;
+const pointerA = 0;
+const result = [];
+
+// Check A[pointerA]
+// timestamp d < 0.2, [timestamp, A, B], pointerA++
+// otherwise
+// timestampA > timestamp B, [timestampB, null, B], pointerB++
+
+// Check A[pointerA]
+// timestampA = timestampB, [timestamp, A, B], pointerA++
+// otherwise
+// timestampA > timestampB, [timestampA, A, null], pointerA++
+// otherwise
+// timestampB > timestampA, [timestampB, null, B], pointerB++
+
+
+// A.forEach((item) => {
+//    const timestamp = item[0];
+//    const value = item[1];
+   
+//    if (Math.abs(B[pointerB][0] - timestamp) <= 0.2) {
+//        result.push([timestamp, value, B[pointerB][0]]);
+//        pointerB++;
+//    } else {
+//        result.push(timestamp, value, null);
+//    }
+// });
+
+
+
+
+
+const dataMapA = new Map();
+const dataMapB = new Map();
+const keySet = new Set();
+
+A = [[1, "A1"], [2, "A2"], [3, "A3"], [4, "A4"]]
+B = [[1, "B1"], [3, "B3"], [4, "B4"], [5, "B5"]]
+
+A.forEach((item) => {
+    dataMapA.set(item[0], item[1]);
+    keySet.add(item[0]);
+})
+
+B.forEach((item) => {
+    dataMapB.set(item[0], item[1]);
+    keySet.add(item[0]);
+});
+
+console.log(`data A: `, dataMapA);
+console.log(`data B: `, dataMapB);
+
+const result = [];
+
+console.log(`[keyset] `, keySet);
+
+// Merge
+for (let item of keySet) {    
+    if (dataMapA.has(item) && dataMapB.has(item)) {
+        result.push([item, dataMapA.get(item), dataMapB.get(item)]);
+    } else if (dataMapA.has(item)) {
+        result.push([item, dataMapA.get(item), null]);
+    } else if (dataMapB.has(item)) {
+        result.push([item, null, dataMapB.get(item)]);
+    }
+}
+
+console.log(result);
+
+
